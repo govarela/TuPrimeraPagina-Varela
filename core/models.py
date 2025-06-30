@@ -1,21 +1,30 @@
 from django.db import models
 
-class Auto(models.Model):
-    modelo = models.CharField(max_length=100)  # Campo string de 100 caracteres
-    año = models.IntegerField()  # Campo entero
-    
-class Estudiante(models.Model):
-    nombre = models.CharField(max_length=30)  # Campo string de 30 caracteres
-    apellido = models.CharField(max_length=30)  # Campo string de 30 caracteres
-    email = models.EmailField()  # Campo de email
+class Artista(models.Model):
+    nombre = models.CharField(max_length=100)
+    genero = models.CharField(max_length=50)
+    nacionalidad = models.CharField(max_length=50)
+    biografia = models.TextField()
 
-class Carrera(models.Model):
-    carrera = models.CharField(max_length=30)  # Campo string de 30 caractere
-    creditos = models.IntegerField()  # Campo entero
-    fechaDeInicio = models.DateField()  # Campo de fecha
+    def __str__(self):
+        return self.nombre
 
-class Garantia(models.Model):
-    nombre = models.CharField(max_length=100)  # Campo string de 100 caracteres
-    email = models.EmailField()  # Campo de email
-    telefono = models.IntegerField()  # Campo entero
-    parentezco = models.BooleanField()  # Campo booleano
+
+class Album(models.Model):
+    titulo = models.CharField(max_length=100)
+    artista = models.CharField(max_length=100)  # Nombre del artista (sin FK)
+    anio = models.IntegerField()
+    genero = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.titulo} ({self.anio})"
+
+
+class Cancion(models.Model):
+    titulo = models.CharField(max_length=100)
+    album = models.CharField(max_length=100)  # Nombre del álbum (sin FK)
+    duracion = models.CharField(max_length=10)  # Ej: "3:45"
+    letra = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.titulo
