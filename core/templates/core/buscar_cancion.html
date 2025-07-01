@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Buscar Canción</h2>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-primary">Buscar</button>
+    </form>
+
+    {% if canciones %}
+        <hr>
+        <h4>Resultados:</h4>
+        <ul>
+            {% for cancion in canciones %}
+                <li>{{ cancion.titulo }} - {{ cancion.album }} ({{ cancion.album.artista }})</li>
+            {% empty %}
+                <li>No se encontraron resultados.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}
