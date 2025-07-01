@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de Artistas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Artistas Registrados</h2>
+    <ul class="list-group">
+        {% for artista in artistas %}
+            <li class="list-group-item">
+                <strong>{{ artista.nombre }}</strong> - {{ artista.genero }}
+            </li>
+        {% empty %}
+            <li class="list-group-item">No hay artistas registrados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
