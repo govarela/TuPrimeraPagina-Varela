@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Perfiles de artistas</h2>
+
+{% if pages %}
+  <div class="row">
+    {% for page in pages %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if page.imagen %}
+            <img src="{{ page.imagen.url }}" class="card-img-top" alt="{{ page.titulo }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ page.titulo }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ page.subtitulo }}</h6>
+            <p class="card-text">{{ page.contenido|truncatewords:25 }}</p>
+            <a href="{% url 'page_detail' page.pk %}" class="btn btn-primary">Leer más</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No hay páginas aún.</p>
+{% endif %}
+{% endblock %}

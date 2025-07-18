@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>{{ page.titulo }}</h2>
+  <h5 class="text-muted">{{ page.subtitulo }}</h5>
+  <p><small>Publicado el {{ page.fecha_publicacion }}</small></p>
+
+  {% if page.imagen %}
+    <img src="{{ page.imagen.url }}" class="img-fluid mb-4" alt="{{ page.titulo }}">
+  {% endif %}
+
+  <div>
+    {{ page.contenido|safe }}
+  </div>
+</div>
+{% endblock %}
+
+{% if user.is_authenticated %}
+  <hr>
+  <a href="{% url 'page_edit' page.pk %}" class="btn btn-warning">✏️ Editar</a>
+  <a href="{% url 'page_delete' page.pk %}" class="btn btn-danger">🗑️ Borrar</a>
+{% endif %}
